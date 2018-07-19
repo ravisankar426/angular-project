@@ -1,7 +1,8 @@
 import { Store } from '@ngrx/store';
 import { ErrorModel } from './errors.model';
 import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs'
+import {Observable} from 'rxjs';
+import * as ErrorsActions from './store/errors.actions';
 
 @Component({
   selector: 'app-errors',
@@ -24,6 +25,17 @@ export class ErrorsComponent implements OnInit {
 
   FetchErrors(){
    this.errorState=this.store.select('errors'); 
+  }
+
+  Remove(error){
+    this.store.dispatch(new ErrorsActions.RemoveErrors(error));
+    this.FetchErrors();
+  }
+
+  Add(){
+    var error=new ErrorModel("100","Error - 100");
+    this.store.dispatch(new ErrorsActions.AddErrors(error));
+    this.FetchErrors();
   }
 
 }

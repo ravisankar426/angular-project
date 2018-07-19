@@ -1,16 +1,21 @@
-<div class="col-md-11">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Error Id</th>
-        <th>Error</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let error of (errorState | async).errors">
-        <td>{{error._Id}}</td>
-        <td>{{error.error}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<table>
+  <tr>
+      <td class="float-right"><span class="btn btn-success" (click)="Add()">Add</span></td>
+  </tr>
+</table>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Error Id</th>
+      <th>Error</th>
+      <th>Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let error of (errorState | async).errors">
+      <td>{{error._Id}}</td>
+      <td>{{error.error}}</td>
+      <td><span class="btn btn-danger" (click)="Remove(error)">Remove</span></td>
+    </tr>
+  </tbody>
+</table>    

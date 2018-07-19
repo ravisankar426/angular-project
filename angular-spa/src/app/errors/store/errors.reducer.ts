@@ -15,6 +15,12 @@ export function errorsReducer(state=initialState,action:ErrorsActions.ErrorsActi
                 ...state,
                 errors:[...state.errors,action.payload]
             };
+        case ErrorsActions.REMOVE_ERRORS:
+            var indexToRemove=state.errors.lastIndexOf(action.payload);
+            return{
+                ...state,
+                errors:[...state.errors.slice(0,indexToRemove),...state.errors.slice(indexToRemove+1,(state.errors.length-indexToRemove-1))]
+            }
         default:return initialState;
     }
 }
