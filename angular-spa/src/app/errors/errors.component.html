@@ -1,0 +1,16 @@
+<div class="col-md-11">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Error Id</th>
+        <th>Error</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let error of (errorState | async).errors">
+        <td>{{error._Id}}</td>
+        <td>{{error.error}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

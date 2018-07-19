@@ -3,44 +3,11 @@
     </head>
     <body>
         <div class="container container-fluid col-md-12">
-            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-              <!-- Brand -->
-              <a class="navbar-brand" href="#">{{WebsiteName}}</a>
-
-              <!-- Links -->
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link 1</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link 2</a>
-                </li>
-                <!-- Dropdown -->
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Admin
-                  </a>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">New User</a>
-                    <a class="dropdown-item" href="#">Users</a>
-                    <a class="dropdown-item" href="#">Errors</a>
-                  </div>
-                </li>
-              </ul>
-            </nav>
-            <div class="col-md-4"></div>
-            <div class="col-lg-4">
-                <div class="form-group">
-                    <label for="email">Email address:</label>
-                    <input type="email" class="form-control" id="email">
-                </div>
-                <div class="form-group">
-                    <label for="pwd">Password:</label>
-                    <input type="password" class="form-control" id="pwd">
-                </div>
-                <button type="submit" class="btn btn-success">Login</button>
-                <div id="response"></div>
-            </div>
+            <app-header></app-header>
+            <router-outlet></router-outlet>
         </div>
     </body>
 </html>
+
+<!---->
+
