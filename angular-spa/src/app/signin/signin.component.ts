@@ -1,7 +1,10 @@
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as AuthActions from './../auth/store/auth.actions';
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../auth/auth.service';
-import {ErrorService} from '../errors/errors.service';
 import {UserModel} from '../auth/user.model';
+import * as fromAuth from '../auth/store/auth.reducers';
 
 @Component({
   selector: 'app-signin',
@@ -11,21 +14,26 @@ import {UserModel} from '../auth/user.model';
 export class SigninComponent implements OnInit {
   user: UserModel;
 
-  constructor(private authService:AuthService,private errorService:ErrorService){  
+  constructor(private authStore:Store<fromAuth.State>,
+              private router:Router){  
     this.user=new UserModel();  
   } 
   
-  ngOnInit() {    
+
+
+  ngOnInit() { 
   }
 
   SignIn(){
-    this.authService.SignIn(this.user.UserId,this.user.Password)
-    .then((result)=>{
-        console.log(result);
-    })
-    .catch((e)=>{
-      console.log(e);
-    });
+    this.authStore.dispatch(new AuthActions.SignIn(this.user));
+    this.router.navigate(['home']);
+    // this.authService.SignIn(this.user.UserId,this.user.Password)
+    // .then((result)=>{
+    //     console.log(result);
+    // })
+    // .catch((e)=>{
+    //   console.log(e);
+    // });
   }
 
 }

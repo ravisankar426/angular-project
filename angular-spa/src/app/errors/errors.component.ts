@@ -1,8 +1,10 @@
+import { AppState } from './../store/app.reducers';
 import { Store } from '@ngrx/store';
 import { ErrorModel } from './errors.model';
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import * as ErrorsActions from './store/errors.actions';
+import * as fromErrors from './store/errors.reducer'
 
 @Component({
   selector: 'app-errors',
@@ -11,10 +13,10 @@ import * as ErrorsActions from './store/errors.actions';
 })
 export class ErrorsComponent implements OnInit {
 
-  errorState: Observable<{errors:ErrorModel[]}>;
+  errorState: Observable<fromErrors.State>;
   errors:ErrorModel[];
 
-  constructor(private store:Store<{errors:{errors:ErrorModel[]}}>
+  constructor(private store:Store<AppState>
   ) {
     
    }

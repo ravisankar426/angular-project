@@ -1,7 +1,11 @@
 import * as ErrorsActions from './errors.actions';
 import { ErrorModel } from './../errors.model';
 
-const initialState={
+export interface State{
+    errors:ErrorModel[];
+}
+
+const initialState:State={
     errors:[
         new ErrorModel("1","Test"),
         new ErrorModel("2","Test2"),

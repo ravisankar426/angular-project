@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
               <!-- Brand -->
-    <a class="navbar-brand" href="#" routerLink="signin">{{WebsiteName}}</a>
+    <a [style.pointer-events]="!(authState | async).authenticated ?'none':'auto'"  class="navbar-brand" href="#" routerLink="home">{{WebsiteName}}</a>
     <!-- Links -->
     
     <div class="collapse navbar-collapse">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto" *ngIf="(authState | async).authenticated">
         <li class="nav-item">
           <a class="nav-link" href="#" routerLink="errors">Errors</a>
         </li>
@@ -20,12 +20,17 @@
           </div>
         </li>-->
       </ul>
-      <ul class="navbar-nav ml-auto">
+      <ul *ngIf="!(authState | async).authenticated" class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link" href="#" routerLink="signin">Sign In</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" routerLink="signup">Sign Up</a>
+        </li>
+      </ul>
+      <ul *ngIf="(authState | async).authenticated" class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#" (click)="Logout()">Log out</a>
         </li>
       </ul>
     </div>

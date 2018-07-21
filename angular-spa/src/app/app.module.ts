@@ -1,3 +1,4 @@
+import { AuthActions } from './auth/store/auth.actions';
 import { ErrorsActions } from './errors/store/errors.actions';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -16,8 +17,12 @@ import { HeaderComponent } from './header/header.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import {errorsReducer} from './errors/store/errors.reducer';
+import {authReducer} from './auth/store/auth.reducers';
+import { HomeComponent } from './home/home.component'
+import {reducers} from './store/app.reducers'
 
 const appRoutes=[
+  {path:'home',component:HomeComponent},
   {path:'errors',component:ErrorsComponent},
   {path:'signin',component:SigninComponent},
   {path:'signup',component:SignupComponent},
@@ -30,14 +35,15 @@ const appRoutes=[
     ErrorsComponent,
     HeaderComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    StoreModule.forRoot({errors:errorsReducer})
+    StoreModule.forRoot(reducers)
   ],
   providers: [AuthService,ErrorService,ErrorData,UserData],
   bootstrap: [AppComponent]
