@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { AppState } from './../store/app.reducers';
 import { Store } from '@ngrx/store';
 import { ErrorModel } from './errors.model';
@@ -5,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import * as ErrorsActions from './store/errors.actions';
 import * as fromErrors from './store/errors.reducer'
+import * as Config from '../config'
 
 @Component({
   selector: 'app-errors',
@@ -16,9 +18,8 @@ export class ErrorsComponent implements OnInit {
   errorState: Observable<fromErrors.State>;
   errors:ErrorModel[];
 
-  constructor(private store:Store<AppState>
-  ) {
-    
+  constructor(private store:Store<AppState>,
+              private httpClient:HttpClient) {   
    }
 
   ngOnInit() {
@@ -27,6 +28,8 @@ export class ErrorsComponent implements OnInit {
 
   FetchErrors(){
    this.errorState=this.store.select('errors'); 
+   return this.httpClient.get(`${Config.errorsBaseUri}errors`)
+   .subscribe(()=>{});
   }
 
   Remove(error){

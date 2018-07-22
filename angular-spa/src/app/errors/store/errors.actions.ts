@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { ErrorModel } from './../errors.model';
 import { Action } from '@ngrx/store';
 

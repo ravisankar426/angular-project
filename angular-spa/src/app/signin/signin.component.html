@@ -1,13 +1,19 @@
-<div class="col-lg-4">
-    <div class="form-group">
-        <label for="email">Email address:</label>
-        <input type="email" class="form-control" [(ngModel)]="user.UserId" id="email">
+<div class="row">
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" [(ngModel)]="user.UserId" id="email">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" [(ngModel)]="user.Password" id="pwd">
+        </div>
+        <div>
+        <button type="submit" class="btn btn-success" (click)="SignIn()" >Login</button>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="pwd">Password:</label>
-        <input type="password" class="form-control" [(ngModel)]="user.Password" id="pwd">
-    </div>
-    <div class="row">
-      <button type="submit" class="btn btn-success" (click)="SignIn()" >Login</button>
-    </div>
+</div>
+<div class="row" *ngIf="authState ? (authState | async).authStatus===2 : false">
+    <div class="col-lg-4"></div>
+    <span class="red">Invalid User name or Password.</span>
 </div>
