@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
-import {Router,RouterModule} from '@angular/router';
+import { Router, RouterModule, CanActivate } from '@angular/router';
 import {StoreModule} from '@ngrx/store'
 
 import { AppComponent } from './app.component';
@@ -23,11 +23,12 @@ import {authReducer} from './auth/store/auth.reducers';
 import { HomeComponent } from './home/home.component'
 import {reducers} from './store/app.reducers'
 import {EffectsModule} from '@ngrx/effects'
+import {AuthGuardService} from './auth/auth-guard.service'
 
 
 const appRoutes=[
-  {path:'home',component:HomeComponent},
-  {path:'errors',component:ErrorsComponent},
+  {path:'home',component:HomeComponent,canActivate:[AuthGuardService]},
+  {path:'errors',component:ErrorsComponent,canActivate:[AuthGuardService]},
   {path:'signin',component:SigninComponent},
   {path:'signup',component:SignupComponent},
   {path:'',redirectTo:'/signin',pathMatch:'full'}
@@ -54,7 +55,8 @@ const appRoutes=[
               ErrorService,
               ErrorData,
               UserData,
-              {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true}],
+              {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true},
+              AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
