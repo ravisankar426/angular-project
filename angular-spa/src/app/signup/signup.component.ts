@@ -1,6 +1,8 @@
+import * as AuthActions from './../auth/store/auth.actions';
+import { AppState } from './../store/app.reducers';
+import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import {UserModel} from '../auth/user.model';
-import {AuthService} from '../auth/auth.service';
 import {ErrorService} from '../errors/errors.service';
 
 @Component({
@@ -12,7 +14,7 @@ export class SignupComponent implements OnInit {
 
   user: UserModel;
 
-  constructor(private authService:AuthService,private errorService:ErrorService){  
+  constructor(private appState:Store<AppState>){  
     this.user=new UserModel();  
   } 
   
@@ -20,10 +22,11 @@ export class SignupComponent implements OnInit {
   }
 
   CreateUser(){
-    this.authService.CreateUser(this.user.UserId,this.user.Password)
-    .then((user)=>{
-      console.log(user);
-    });
+    this.appState.dispatch(new AuthActions.TrySignUp(this.user));
+    // this.authService.CreateUser(this.user.UserId,this.user.Password)
+    // .then((user)=>{
+    //   console.log(user);
+    // });
   }
 
 }

@@ -1,12 +1,28 @@
+import { AppState } from './../store/app.reducers';
+import { Store } from '@ngrx/store';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {HttpInterceptor,HttpRequest,HttpHandler,HttpEvent} from '@angular/common/http'
-import {tap} from 'rxjs/operators';
+import { tap, map, switchMap } from 'rxjs/operators';
+import * as fromAuth from './store/auth.reducers'
 
 
+@Injectable()
 export class AuthInterceptor implements HttpInterceptor{
-    intercept(req:HttpRequest<any>,next:HttpHandler): Observable<HttpEvent<any>>{
-        const newHeaders=req.headers.append('x-auth','true')
-        const clonedReq=req.clone({headers:newHeaders});  
-        return next.handle(clonedReq);
+
+    constructor(private appState:Store<AppState>){
+
+    }
+
+    intercept(req:HttpRequest<any>,next:HttpHandler): Observable<HttpEvent<any>>{       
+         
+        return this.appState.select('auth')
+        .pipe(switchMap((authState:fromAuth.State)=>{
+            if(!authState.token)
+                return next.handle(req);
+            const newHeaders=req.headers.append('x-auth',authState.token);
+            const clonedReq=req.clone({headers:newHeaders}); 
+            return next.handle(clonedReq);
+        }));
     }
 }
