@@ -1,21 +1,33 @@
-<table>
-  <tr>
-      <td class="float-right"><span class="btn btn-success" (click)="Add()">Add</span></td>
-  </tr>
-</table>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Error Id</th>
-      <th>Error</th>
-      <th>Remove</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let error of (errorState | async).errors">
-      <td>{{error._id}}</td>
-      <td>{{error.error}}</td>
-      <td><span class="btn btn-danger" (click)="Remove(error)">Remove</span></td>
-    </tr>
-  </tbody>
-</table>    
+<div class="card">
+  <div class="card-header bg-success text-white">
+    <div class="row">
+      <div class="col">
+        <h5>Errors</h5>
+      </div>
+      <div class="col col-md-2">
+        <input type="text" class="form-control float-right" />
+      </div>
+      <div class="col">
+        <input type="button" class="btn btn-primary float-right" value="search" />
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Error Id</th>
+          <th>Error</th>
+          <th>Stack</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let error of (errorState | async).errors">
+          <td>{{error._id}}</td>
+          <td>{{error.error}}</td>
+          <td>{{error.stack}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>  
