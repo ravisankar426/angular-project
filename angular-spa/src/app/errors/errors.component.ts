@@ -19,17 +19,15 @@ export class ErrorsComponent implements OnInit {
   errors:ErrorModel[];
 
   constructor(private store:Store<AppState>,
-              private httpClient:HttpClient) {   
+              private httpClient:HttpClient) { 
    }
 
   ngOnInit() {
-      this.FetchErrors();
+    this.FetchErrors();
   }
 
   FetchErrors(){
    this.errorState=this.store.select('errors'); 
-   return this.httpClient.get(`${Config.errorsBaseUri}errors`)
-   .subscribe(()=>{});
   }
 
   Remove(error){
@@ -38,7 +36,7 @@ export class ErrorsComponent implements OnInit {
   }
 
   Add(){
-    var error=new ErrorModel("100","Error - 100");
+    var error=new ErrorModel("100","Error - 100","");
     this.store.dispatch(new ErrorsActions.AddErrors(error));
     this.FetchErrors();
   }

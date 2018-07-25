@@ -1,3 +1,4 @@
+import { ErrorsEffects } from './errors/store/errors.effects';
 import { AuthEffects } from './auth/store/auth.effects';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthActions } from './auth/store/auth.actions';
@@ -49,7 +50,7 @@ const appRoutes=[
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects,ErrorsEffects])
   ],
   providers: [AuthService,
               ErrorService,

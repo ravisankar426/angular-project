@@ -1,3 +1,4 @@
+
 import { SignIn } from './../auth/store/auth.actions';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -6,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import * as AuthActions from '../auth/store/auth.actions'
 import * as fromApp from '../store/app.reducers'
+import * as ErrorsActions from './../errors/store/errors.actions';
 
 @Component({
   selector: 'app-header',
@@ -26,7 +28,10 @@ export class HeaderComponent implements OnInit {
 
   Logout(){
     this.appState.dispatch(new AuthActions.LogOut());
-    this.router.navigate(['SignIn']);
+  }
+
+  GetErrors(){
+    this.appState.dispatch(new ErrorsActions.FetchErrors());
   }
 
 }

@@ -13,7 +13,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let error of (errorState | async).errors">
-      <td>{{error._Id}}</td>
+      <td>{{error._id}}</td>
       <td>{{error.error}}</td>
       <td><span class="btn btn-danger" (click)="Remove(error)">Remove</span></td>
     </tr>

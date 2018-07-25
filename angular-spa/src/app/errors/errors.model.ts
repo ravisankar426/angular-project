@@ -1,4 +1,4 @@
 export class ErrorModel{
-     constructor(public _Id:string,public error:string){
+     constructor(public _id:string,public error:string,public stack:string){
     }
 }

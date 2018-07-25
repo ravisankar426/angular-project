@@ -7,9 +7,11 @@ export interface State{
 
 const initialState:State={
     errors:[
-        new ErrorModel("1","Test"),
-        new ErrorModel("2","Test2"),
-    ]};
+        new ErrorModel("1","Test",""),
+        new ErrorModel("2","Test2",""),
+    ]
+    
+};
 
 export function errorsReducer(state=initialState,action:ErrorsActions.ErrorsActions){
     switch(action.type)
@@ -25,6 +27,13 @@ export function errorsReducer(state=initialState,action:ErrorsActions.ErrorsActi
                 ...state,
                 errors:[...state.errors.slice(0,indexToRemove),...state.errors.slice(indexToRemove+1,(state.errors.length-indexToRemove-1))]
             }
+        case ErrorsActions.SET_ERRORS:
+            state.errors=action.payload;
+            return state;
+            // return{
+            //     ...state,
+            //     errors:[action.payload]
+            // }
         default:return initialState;
     }
 }
